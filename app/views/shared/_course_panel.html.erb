@@ -1,0 +1,20 @@
+<div class="col-md-4">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title"><%= course.name %></h3>
+    </div>
+    <div class="panel-body">
+      <%= course.description %>
+      </br>
+      <b>Locations: </b>
+      <% course.locations.each do |location| %>
+        <%= location.code %>
+      <% end %>
+      </br>
+      <b>Categories: </b>
+      <% course.categories.each do |category| %>
+        <%= category.name %>
+      <% end %>
+    </div>
+  </div>
+</div>
