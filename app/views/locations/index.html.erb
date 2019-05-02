@@ -1,0 +1,16 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Locations</h1>
+
+<%= link_to 'New Location', new_location_path %>
+
+<% @locations.each do |location| %>
+  <div class="page-header">
+    <h3 class="panel-title"><%= location.code %></h3>
+  </div>
+    <% location.courses.each do |course| %>
+      <%= render partial: "shared/course_panel", locals: {course: course} %>
+    <% end %>
+<% end %>
+
+

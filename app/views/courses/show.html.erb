@@ -10,5 +10,13 @@
   <%= @course.description %>
 </p>
 
+<p>
+  <strong>Location:</strong>
+  <%= @course.locations.each do |location| %>
+    <%= location.code %>
+    <%= link_to location.code, courses_path(:id => location.id) %>
+  <% end %>
+</p>
+
 <%= link_to 'Edit', edit_course_path(@course) %> |
 <%= link_to 'Back', courses_path %>
