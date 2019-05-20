@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<div class="jumbotron">
+  <h1>RMIT Courses</h1>
+  <br>
+  <p>Browse courses and coordinators</p>
+  <hr>
+  <% if !logged_in? %>
+    <%= link_to 'Signup', signup_path, class: 'btn btn-primary btn-lg' %>
+    <%= link_to 'Login', login_path, class: 'btn btn-primary btn-lg' %>
+  <% else %>
+    <%= link_to 'Logout', logout_path, method: :delete, class: 'btn btn-primary btn-lg' %>
+  <% end %>
+</div>

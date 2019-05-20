@@ -3,7 +3,6 @@ class CreateCoordinators < ActiveRecord::Migration[5.1]
     create_table :coordinators do |t|
       t.string :name
       t.string :email
-      t.string :password
 
       t.timestamps
     end

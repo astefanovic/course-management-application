@@ -32,6 +32,8 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
   font-size: 3em;
   letter-spacing: -2px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 h2 {
@@ -92,4 +94,17 @@ footer ul {
 footer ul li {
   float: left;
   margin-left: 15px;
+}
+
+/* form */
+.form-control {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+/* coordinator */
+
+.coordinator-caption {
+  margin-right: 30px;
+  margin-left: 30px;
 }

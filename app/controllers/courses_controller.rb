@@ -1,5 +1,6 @@
 class CoursesController < ApplicationController
   include ApplicationHelper
+  include CoursesHelper
   
   before_action :set_course, only: [:show, :edit, :update, :destroy]
 
@@ -26,15 +27,25 @@ class CoursesController < ApplicationController
   # POST /courses
   # POST /courses.json
   def create
-    course_params = params.require(:course).permit([:name, :description, :image, :prerequisites => [], :locations => [], :categories => []])
+    @course_params = params.require(:course).permit([:name, :description, :locations => [], :categories => []])
+
+    #assign_to_course_params(coordinator_id: 2)
+    #course_params[:coordinators] = current_coordinator
     
-    replace_id_array(Location, course_params[:locations])
-    replace_id_array(Category, course_params[:categories])
-    
-    @course = Course.new(course_params)
+    replace_id_array(Location, @course_params[:locations])
+    replace_id_array(Category, @course_params[:categories])
+
+    logger.info "coordinatorid #{session[:coordinator_id]}"
+    logger.info Coordinator.find_by(id: session[:coordinator_id]).inspect
+    @course = current_coordinator.courses.build(@course_params)
+    #@course = Course.new(@course_params)
+    logger.info @course.inspect
+    logger.info @course.save
 
     respond_to do |format|
       if @course.save
+        logger.info @course.inspect
+        logger.info Coordinator.find_by(id: 1).courses.each{|i| i.inspect}
         format.html { redirect_to @course, notice: 'Course was successfully created.' }
         format.json { render :show, status: :created, location: @course }
       else
@@ -47,7 +58,7 @@ class CoursesController < ApplicationController
   # PATCH/PUT /courses/1
   # PATCH/PUT /courses/1.json
   def update
-    course_params = params.require(:course).permit([:name, :description, :image, :prerequisites => [], :locations => [], :categories => []])
+    course_params = params.require(:course).permit([:name, :description, :locations => [], :categories => []])
     
     respond_to do |format|
       if @course.update(course_params)

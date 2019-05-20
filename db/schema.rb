@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190410124023) do
+ActiveRecord::Schema.define(version: 20190508104512) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -26,14 +26,15 @@ ActiveRecord::Schema.define(version: 20190410124023) do
   create_table "coordinators", force: :cascade do |t|
     t.string "name"
     t.string "email"
-    t.string "password"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "password_digest"
   end
 
   create_table "courses", force: :cascade do |t|
     t.string "name"
     t.text "description"
+    t.integer "coordinator_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -45,6 +46,14 @@ ActiveRecord::Schema.define(version: 20190410124023) do
 
   create_table "locations", force: :cascade do |t|
     t.string "code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "votes", force: :cascade do |t|
+    t.boolean "is_positive"
+    t.integer "coordinator_id"
+    t.integer "course_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

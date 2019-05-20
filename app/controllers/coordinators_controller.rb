@@ -28,6 +28,7 @@ class CoordinatorsController < ApplicationController
 
     respond_to do |format|
       if @coordinator.save
+        log_in @coordinator
         format.html { redirect_to @coordinator, notice: 'Coordinator was successfully created.' }
         format.json { render :show, status: :created, location: @coordinator }
       else

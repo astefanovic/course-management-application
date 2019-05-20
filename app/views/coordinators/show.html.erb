@@ -1,5 +1,7 @@
 <p id="notice"><%= notice %></p>
 
+<%= gravatar_for @coordinator %>
+
 <p>
   <strong>Name:</strong>
   <%= @coordinator.name %>
@@ -8,11 +10,6 @@
 <p>
   <strong>Email:</strong>
   <%= @coordinator.email %>
-</p>
-
-<p>
-  <strong>Password:</strong>
-  <%= @coordinator.password %>
 </p>
 
 <%= link_to 'Edit', edit_coordinator_path(@coordinator) %> |

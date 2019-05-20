@@ -4,12 +4,32 @@
   <h1>Courses</h1>
 </div>
 
-<div class="btn btn-default"> <%= link_to 'New Course', new_course_path %> </div>
+<ul class="nav nav-tabs" role="tablist">
+ <li class="active"><a href="#courses" data-toggle="tab">Courses</a></li>
+ <li><a href="#coordinators" data-toggle="tab">Coordinators</a></li>
+</ul>
 
-<div class="row">
-  <% @courses.each do |course| %>
-    <%= render partial: "shared/course_panel", locals: {course: course} %>
-  <% end %>
+<div class="tab-content">
+  <div class="tab-pane active" id="courses">
+    <div class="row">
+      <% @courses.each do |course| %>
+        <%= render partial: "shared/course_panel", locals: {course: course} %>
+      <% end %>
+    </div>
+    <% if logged_in? %>
+      <div class="btn btn-default"> <%= link_to 'New Course', new_course_path %> </div>
+    <% end %>
+  </div>
+
+  <div class="tab-pane" id="coordinators">
+    <div class="row">
+      <% Coordinator.all.each do |coordinator| %>
+        <%= render partial: "shared/coordinator_panel", locals: {coordinator: coordinator} %>
+      <% end %>
+    </div>
+  </div>
 </div>
+
+
 
 

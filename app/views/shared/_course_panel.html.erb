@@ -15,6 +15,20 @@
       <% course.categories.each do |category| %>
         <%= category.name %>
       <% end %>
+      </br>
+      <% if logged_in? %>
+        <div class="button-panel">
+          <div class="pull-left">
+            <%= link_to votes_path(is_positive: true, course_id: course.id, coordinator_id: current_coordinator.id), method: :post, class: 'btn btn-success', title: 'Positive vote' do %>
+              &uarr; <%= Vote.where(course_id: course.id, is_positive: true).count %>
+            <% end %>
+
+            <%= link_to votes_path(is_positive: false, course_id: course.id, coordinator_id: current_coordinator.id), method: :post, class: 'btn btn-danger', title: 'Negative vote' do %>
+              &darr; <%= Vote.where(course_id: course.id, is_positive: false).count %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
