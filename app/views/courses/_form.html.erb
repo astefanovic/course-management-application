@@ -22,7 +22,14 @@
     <div class="form-group">
       <div class='col-md-4'>
         <%= form.label :description %>
-        <%= form.text_field :description, id: :course_description %>
+        <%= form.text_area :description, id: :course_description %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class='col-md-4'>
+        <%= form.label :prerequisites %>
+        <%= form.text_field :prerequisites, id: :course_prerequisites %>
       </div>
     </div>
     
