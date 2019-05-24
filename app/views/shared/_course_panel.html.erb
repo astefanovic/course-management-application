@@ -6,6 +6,10 @@
     <div class="panel-body">
       <p><%= course.description %></p>
       <p>
+        <b>Prerequisites: </b>
+        <%= course.prerequisites %>
+      </p>
+      <p>
         <b>Locations: </b>
         <% course.locations.each do |location| %>
           <%= location.code %>

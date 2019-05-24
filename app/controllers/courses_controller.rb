@@ -27,20 +27,13 @@ class CoursesController < ApplicationController
   # POST /courses
   # POST /courses.json
   def create
-    @course_params = params.require(:course).permit([:name, :description, :locations => [], :categories => []])
-
-    #assign_to_course_params(coordinator_id: 2)
-    #course_params[:coordinators] = current_coordinator
+    @course_params = params.require(:course).permit([:name, :description, :prerequisites, :locations => [], :categories => []])
     
+    # Replace the ids with actual models
     replace_id_array(Location, @course_params[:locations])
     replace_id_array(Category, @course_params[:categories])
 
-    logger.info "coordinatorid #{session[:coordinator_id]}"
-    logger.info Coordinator.find_by(id: session[:coordinator_id]).inspect
     @course = current_coordinator.courses.build(@course_params)
-    #@course = Course.new(@course_params)
-    logger.info @course.inspect
-    logger.info @course.save
 
     respond_to do |format|
       if @course.save
