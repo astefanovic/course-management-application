@@ -34,11 +34,10 @@ class CoursesController < ApplicationController
     replace_id_array(Category, @course_params[:categories])
 
     @course = current_coordinator.courses.build(@course_params)
+        logger.info @course.inspect
 
     respond_to do |format|
       if @course.save
-        logger.info @course.inspect
-        logger.info Coordinator.find_by(id: 1).courses.each{|i| i.inspect}
         format.html { redirect_to @course, notice: 'Course was successfully created.' }
         format.json { render :show, status: :created, location: @course }
       else
