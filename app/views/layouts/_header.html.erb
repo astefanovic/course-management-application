@@ -2,7 +2,13 @@
   <div class="container">
     <nav>
       <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "Home", root_path %></li>
+        <li>
+          <% if logged_in? %> 
+            <%= link_to "Home", courses_path %>
+          <% else %> 
+            <%= link_to "Home", root_path %>
+          <% end %>
+        </li>
         <li><%= link_to "Courses", courses_path %></li>
         <li>
           <a href="/categories" class="dropdown-toggle" data-toggle="dropdown" role="button">

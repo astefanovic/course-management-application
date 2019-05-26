@@ -7,7 +7,7 @@ class VotesController < ApplicationController
     vote.is_positive = vote_params[:is_positive]
     vote.save
 
-    redirect_to courses_path
+    redirect_back(fallback_location: courses_path)
     if (vote.is_positive == old_value)
       flash[:danger] = "You can't vote more than once"
     else

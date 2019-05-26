@@ -27,7 +27,7 @@ class CoursesController < ApplicationController
   # POST /courses
   # POST /courses.json
   def create
-    @course_params = params.require(:course).permit([:name, :description, :prerequisites, :locations => [], :categories => []])
+    @course_params = params.require(:course).permit([:name, :description, :image, :prerequisites, :locations => [], :categories => []])
     
     # Replace the ids with actual models
     replace_id_array(Location, @course_params[:locations])
@@ -50,7 +50,7 @@ class CoursesController < ApplicationController
   # PATCH/PUT /courses/1
   # PATCH/PUT /courses/1.json
   def update
-    course_params = params.require(:course).permit([:name, :description, :locations => [], :categories => []])
+    course_params = params.require(:course).permit([:name, :description, :image, :locations => [], :categories => []])
     
     respond_to do |format|
       if @course.update(course_params)

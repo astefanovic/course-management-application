@@ -3,6 +3,7 @@
     <div class="panel-heading">
       <h3 class="panel-title"><%= course.name %></h3>
     </div>
+    <%= image_tag course.image, class: "course-image" %>
     <div class="panel-body">
       <p><%= course.description %></p>
       <p>
@@ -12,15 +13,22 @@
       <p>
         <b>Locations: </b>
         <% course.locations.each do |location| %>
-          <%= location.code %>
+          <%= link_to location_path(location) do %>
+            <%= location.code %>
+            <% end %>
+          <% if location != course.locations.last %>, <% end %>
         <% end %>
       </p>
       <p>
         <b>Categories: </b>
         <% course.categories.each do |category| %>
-          <%= category.name %>
+          <%= link_to category_path(category) do %>
+            <%= category.name %>
+          <% end %>
+          <% if category != course.categories.last %>, <% end %>
         <% end %>
       </p>
+      <p class = "small">Created: <%= time_since(course.updated_at) %> ago</p>
       <% if logged_in? %>
         <div class="button-panel">
           <div class="pull-left">

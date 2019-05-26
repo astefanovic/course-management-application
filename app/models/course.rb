@@ -4,6 +4,9 @@ class Course < ApplicationRecord
     has_many :votes, dependent: :destroy
     belongs_to :coordinators, optional: true
 
+    mount_uploader :image, ImageUploader
+    serialize :image, JSON
+
     validates :name,
         presence: true,
         length: { minimum: 10 }
