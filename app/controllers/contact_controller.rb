@@ -6,8 +6,8 @@ class ContactController < ApplicationController
 
   # POST /contact
   def send_email
-    params.require(:contact).permit(:sender, :message)
-    ContactMailer.contact_us(params[:sender], params[:message]).deliver_now
+    contact_params = params.require(:contact).permit(:sender, :message)
+    ContactMailer.contact_us(contact_params[:sender], contact_params[:message]).deliver_now
     redirect_back(fallback_location: courses_path)
     flash[:success] = "Mail sent"
   end
