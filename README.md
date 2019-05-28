@@ -1,24 +1,18 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Students
+Aleksandar Stefanovic - s3605170
 
-Things you may want to cover:
+## Level
+Attempted up to and partially including 80+
 
-* Ruby version
+## Hours
+From Toggl, only part 2:
 
-* System dependencies
+Project	Client	Title	Duration
+RADAssignments			25:59:00
 
-* Configuration
+## Heroku
+URL: http://protected-castle-81823.herokuapp.com
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Last Deployment Log: 
