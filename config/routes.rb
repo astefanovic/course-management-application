@@ -10,6 +10,9 @@ Rails.application.routes.draw do
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
 
+  get    '/contact', to: 'contact#index'
+  post   '/contact', to: 'contact#send_email'
+
   post '/courses/vote', to: 'votes#upsert', as: 'votes'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
