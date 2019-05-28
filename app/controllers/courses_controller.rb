@@ -3,6 +3,8 @@ class CoursesController < ApplicationController
   include CoursesHelper
   
   before_action :set_course, only: [:show, :edit, :update, :destroy]
+  before_action :logged_in_only, except: [:index, :show]
+  before_action :current_coordinators_course_only, only: [:edit]
 
   # GET /courses
   # GET /courses.json
@@ -77,5 +79,12 @@ class CoursesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_course
       @course = Course.find(params[:id])
+    end
+
+    def current_coordinators_course_only
+      if (Course.find(params[:id]).coordinator_id != current_coordinator.id)
+        redirect_back(fallback_location: root_path)
+        flash[:danger] = "Edit only available on your own courses"
+      end
     end
 end

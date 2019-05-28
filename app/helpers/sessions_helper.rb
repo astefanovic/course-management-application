@@ -18,4 +18,11 @@ module SessionsHelper
     session.delete(:coordinator_id)
     current_coordinator = nil
   end
+
+  def logged_in_only
+    if (!logged_in?)
+      redirect_back(fallback_location: root_path)
+      flash[:danger] = "Login or signup to complete this action"
+    end    
+  end
 end

@@ -1,16 +1,55 @@
-<p id="notice"><%= notice %></p>
+<p id="notice"></p>
 
-<%= gravatar_for @coordinator %>
+<div class="row">
+<div class="col-xs-4 col-xs-offset-4">
+  <div class="edit-image">
+    <%= gravatar_for @coordinator %>
+  </div>
+  <h5 class="center">
+    <strong>Name:</strong>
+    <%= @coordinator.name %>
+  </h5>
 
-<p>
-  <strong>Name:</strong>
-  <%= @coordinator.name %>
-</p>
+  <h5 class="center">
+    <strong>Email:</strong>
+    <%= @coordinator.email %>
+  </h5>
+</div>
+<div class="clearfix"></div>
+</div>
+<hr>
+<br>
 
-<p>
-  <strong>Email:</strong>
-  <%= @coordinator.email %>
-</p>
+<div class="row">
+  <% @coordinator.courses.each do |course| %>
+    <div class="col-md-4">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title"><%= course.name %></h3>
+        </div>
+        <%= image_tag course.image, class: "course-image" %>
+        <div class="panel-body">
+          <p><%= course.description %></p>
+          <p>
+            <b>Prerequisites: </b>
+            <%= course.prerequisites %>
+          </p>
+          <p class = "small">Created: <%= time_since(course.updated_at) %> ago</p>
+          <% if logged_in? %>
+            <div class="button-panel">
+              <div class="pull-left">
+                <%= link_to votes_path(is_positive: true, course_id: course.id, coordinator_id: current_coordinator.id), method: :post, class: 'btn btn-success', title: 'Positive vote' do %>
+                  &uarr; <%= Vote.where(course_id: course.id, is_positive: true).count %>
+                <% end %>
 
-<%= link_to 'Edit', edit_coordinator_path(@coordinator) %> |
-<%= link_to 'Back', coordinators_path %>
+                <%= link_to votes_path(is_positive: false, course_id: course.id, coordinator_id: current_coordinator.id), method: :post, class: 'btn btn-danger', title: 'Negative vote' do %>
+                  &darr; <%= Vote.where(course_id: course.id, is_positive: false).count %>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
